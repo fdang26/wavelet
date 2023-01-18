@@ -7,13 +7,15 @@ class Handler implements URLHandler {
     int num = 0;
 
     public String handleRequest(URI url) {
+        // returns Number: # for home page
         if (url.getPath().equals("/")) {
-            return String.format("Number: %d", num);
+            return String.format("Foster's Number: %d", num);
         } else if (url.getPath().equals("/increment")) {
+            // if the path is /increment, add one to num and displayed the increment message
             num += 1;
             return String.format("Number incremented!");
-        } else {
-            System.out.println("Path: " + url.getPath());
+        } else { // for any other path
+            System.out.println("Path: " + url.getPath()); // returns the url path
             if (url.getPath().contains("/add")) {
                 String[] parameters = url.getQuery().split("=");
                 if (parameters[0].equals("count")) {
@@ -28,7 +30,7 @@ class Handler implements URLHandler {
 
 class NumberServer {
     public static void main(String[] args) throws IOException {
-        if(args.length == 0){
+        if (args.length == 0) {
             System.out.println("Missing port number! Try any number between 1024 to 49151");
             return;
         }
